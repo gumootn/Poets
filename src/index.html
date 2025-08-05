@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poet Challenge</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+    <body>
+        <div id="inputForm" class="inputForm">
+            <form action="">
+                <h3>Search by Author, Title or Both</h3>
+                <label for="authorName">Author:</label>
+                <input type="text" id="authorName" name="authorName" placeholder="Search by Author">
+                <label for="poemTitle">Title:</label>
+                <input type="text" id="poemTitle" name="poemTitle" placeholder="Search by Title">
+                <input type="submit" value="Search" id="submitBtn">
+            </form>
+        </div>
+        <div id="authorTableDiv">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Author</th>
+                        <th>Title</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+        <div id="linesTextDiv">
+            <h4 id="linesHeader"></h4>
+            <div id="linesText"></div>
+            <div id="backBtnDiv">
+                <h4 id="backBtn">
+                    Back to the List
+                </h4>
+            </div>
+        </div>
+        <script src="./js/main.js"></script>
+    </body>
+</html>

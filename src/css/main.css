@@ -1,0 +1,97 @@
+body {
+  display: block;
+  width: 100%;
+  justify-content: center;
+  height: 100vh;
+  margin: 20px auto;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  margin: 0 auto;
+}
+
+.inputForm {
+  width: 79%;
+  max-width: 33%;
+  margin-left: 30px;
+}
+
+input[type="submit"] {
+  border-radius: 7px;
+  width: fit-content;
+  padding: 4px;
+  margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: rgb(35, 184, 234);
+}
+
+#authorTableDiv {
+  width: 80%;
+  max-width: 80%;
+  margin-top: 10px;
+  margin-left: 30px;
+}
+
+#linesHeader {
+  text-align: left;
+  margin: 10px 0 5px 30px;
+}
+
+#linesText {
+  text-align: left;
+}
+
+#linesText ul {
+  list-style-type: none;
+}
+
+#backBtnDiv {
+  text-align: left;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 30px;
+  width: 100%;
+}
+
+#backBtn {
+  color: rgb(27, 27, 180);
+}
+
+th {
+  background-color: lightskyblue;
+}
+
+td {
+  border-bottom: solid 1px #252525;
+  border-right: solid 1px #252525;
+  width: 50%;
+  padding: 5px;
+}
+
+td div {
+  color: rgb(27, 27, 180);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+li {
+  padding-bottom: 10px;
+}
+
+.lines {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  #inputForm {
+    width: 79%;
+    max-width: 79%;
+  }
+}

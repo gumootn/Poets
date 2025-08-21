@@ -1,20 +1,38 @@
-let authorTableDiv = document.querySelector("#authorTableDiv");
-let linesTextDiv = document.querySelector("#linesTextDiv");
-let linesHeader = document.querySelector("#linesHeader");
-let linesText = document.querySelector("#linesText");
-let backBtn = document.querySelector("#backBtn").addEventListener("click", backToGrid);
+let authorTableDiv = document.querySelector("#authorTableDiv") as HTMLElement | null;
+let linesTextDiv = document.querySelector("#linesTextDiv") as HTMLElement | null;
+let linesHeader = document.querySelector("#linesHeader") as HTMLElement | null;
+let linesText = document.querySelector("#linesText") as HTMLElement | null;
+const backBtn = document.querySelector("#backBtn");
+if (backBtn) {
+  backBtn.addEventListener("click", backToGrid);
+}
 
-authorTableDiv.style.display = "none";
-linesTextDiv.style.display = "none";
+if (authorTableDiv) {
+  if (authorTableDiv) {
+    authorTableDiv.style.display = "none";
+  }
+}
+if (linesTextDiv) {
+  linesTextDiv.style.display = "none";
+}
 
-let form = document.querySelector("form").addEventListener("submit", generateGrid);
+let form = document.querySelector("form")
+if (form) {
+  form.addEventListener("submit", generateGrid);
+}
 
-function generateGrid(e) {
+type PoemData = {
+  title: string;
+  author: string;
+  lines: string[];
+};
+
+function generateGrid(e: Event) {
   e.preventDefault();
-  let authorNameInput = document.querySelector("#authorName");
-  let titleInput = document.querySelector("#poemTitle");
+  let authorNameInput = document.querySelector("#authorName") as HTMLInputElement | null;
+  let titleInput = document.querySelector("#poemTitle") as HTMLInputElement | null;
 
-  if (validateInput(authorNameInput.value, titleInput.value)) {
+  if (authorNameInput && titleInput && validateInput(authorNameInput.value, titleInput.value)) {
     if (authorNameInput.value !== "" && titleInput.value === "") {
       getAuthor(authorNameInput.value);
     }
@@ -28,11 +46,15 @@ function generateGrid(e) {
 };
 
 function backToGrid() {
-  authorTableDiv.style.display = "block";
-  linesTextDiv.style.display = "none";
+  if (authorTableDiv) {
+    authorTableDiv.style.display = "block";
+  }
+  if (linesTextDiv) {
+    linesTextDiv.style.display = "none";
+  }
 }
 
-async function getAuthor(author) {
+async function getAuthor(author: string) {
   try {
     const response = await fetch(`https://poetrydb.org/author/${author}`);
     if (!response.ok) {
@@ -46,7 +68,7 @@ async function getAuthor(author) {
   }
 }
 
-async function getPoemByTitle(title) {
+async function getPoemByTitle(title: string) {
   try {
     let response = await fetch(`https://poetrydb.org/title/${title}`);
     if (!response.ok) {
@@ -60,7 +82,7 @@ async function getPoemByTitle(title) {
   }
 }
 
-async function getPoemByAuthorAndTitle(author, title) {
+async function getPoemByAuthorAndTitle(author: string, title: string) {
   try {
     let response = await fetch(`https://poetrydb.org/author,title/${author};${title}`);
     if (!response.ok) {
@@ -74,11 +96,13 @@ async function getPoemByAuthorAndTitle(author, title) {
   }
 }
 
-function renderGrid(data) {
-  const tableBody = document.querySelector('#tableBody');
-  tableBody.innerHTML = '';
+function renderGrid(poems: PoemData[]) {
+  const tableBody = document.querySelector('#tableBody') as HTMLTableSectionElement | null;
+  if (tableBody) {
+    tableBody.innerHTML = '';
+  }
 
-  data.forEach(item => {
+  poems.forEach(item => {
     const row = document.createElement('tr');
 
     const cell1 = document.createElement('td');
@@ -92,13 +116,20 @@ function renderGrid(data) {
       ${JSON.stringify(item.author).replace(/"/g, '&quot;')})">${item.title}</div>`;
     row.appendChild(cell2);
 
-    tableBody.appendChild(row);
+    if (tableBody) {
+      tableBody.appendChild(row);
+    }
 
-    authorTableDiv.style.display = "block";
+    if (authorTableDiv) {
+      authorTableDiv.style.display = "block";
+    }
   });
 }
 
-function showLineText(lines, title, author) {
+function showLineText(lines: string[], title: string, author: string) {
+  if (!linesText || !authorTableDiv || !linesTextDiv || !linesHeader) {
+    return;
+  }
   linesText.innerHTML = "";
   authorTableDiv.style.display = "none";
   linesTextDiv.style.display = "block";
@@ -119,7 +150,7 @@ function showLineText(lines, title, author) {
   linesText.appendChild(ul);
 }
 
-function validateInput(author, title) {
+function validateInput(author: string, title: string) {
   if (author === "" && title === "") {
     alert("You must enter either Author, Title or both")
     return false;
